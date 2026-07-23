@@ -11,3 +11,5 @@ alias grep='grep --color=auto'
 # PS1='[\u@\h \W]\$ '
 PS1="\[$(tput bold)\]\[$(tput setaf 48)\]\u\[$(tput setaf 15)\]@\[$(tput setaf 69)\]\h \[$(tput setaf 173)\]\w \[$(tput sgr0)\]$ "
 
+# Default editor
+export EDITOR='micro'
