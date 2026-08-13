@@ -1,9 +1,9 @@
 # chezmoi dotfiles repo
 
 This is my `chezmoi` source directory (`~/.local/share/chezmoi`), which doubles as this
-git repo. It is the single source of truth for my dotfiles across machines — `chezmoi apply`
-reads from here and writes into `$HOME`. `CLAUDE.md` and `README.md` are excluded from being
-applied (see `.chezmoiignore`).
+git repo. It is the single source of truth for my dotfiles across two machines — a macOS
+laptop and this Arch Linux laptop. `chezmoi apply` reads from here and writes into `$HOME`.
+`CLAUDE.md` and `README.md` are excluded from being applied (see `.chezmoiignore.tmpl`).
 
 ## Layout
 
@@ -53,5 +53,17 @@ git repo and never changes the destination). Flag this if asked to touch keyd or
   `eDP-1` laptop panel at a specific position/resolution). This config will misbehave on a
   machine with different outputs — the `output` lines need adjusting per-machine.
 - `.gitignore` excludes `.env` preemptively; no `.env` currently exists in the repo.
-- No templating (`.tmpl`), `.chezmoidata`, or machine-specific branching is in use — every
-  managed file is applied identically to every machine.
+
+## Cross-OS handling (macOS + Arch Linux)
+
+`.chezmoiignore.tmpl` is templated (Go text/template, using chezmoi's built-in
+`.chezmoi.os` variable — `"darwin"` on macOS, `"linux"` here) to skip Linux-only configs
+on macOS: `.config/sway`, `.config/etc/keyd`, `.config/etc/systemd/logind.conf.d`. This is
+the *only* templating in the repo so far — every other managed file is still applied
+identically on both machines, byte-for-byte, with no `.tmpl` extension or `.chezmoidata`.
+
+If a specific file's *content* needs to differ per-OS (not just whether it's applied at
+all — e.g. package manager paths in `dot_config/bash/rc`), convert that individual file to
+a `.tmpl` and branch inside it with `{{ if eq .chezmoi.os "darwin" }}...{{ else }}...{{ end }}`,
+following the same pattern as `.chezmoiignore.tmpl`. Don't add this speculatively — only
+when a real per-machine difference shows up.

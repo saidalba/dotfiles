@@ -1,0 +1,8 @@
+README.md
+CLAUDE.md
+
+{{ if eq .chezmoi.os "darwin" -}}
+.config/sway
+.config/etc/keyd
+.config/etc/systemd/logind.conf.d
+{{- end }}

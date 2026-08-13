@@ -16,6 +16,9 @@ chezmoi apply
 - `dot_config/etc/keyd/*.conf`, `dot_config/etc/systemd/logind.conf.d/*.conf` — copies only,
   not live (see caveat below)
 
+Shared between a macOS laptop and this Arch Linux laptop. `.chezmoiignore.tmpl` skips
+Linux-only configs (sway, keyd, logind) on macOS.
+
 #### Caveat: `dot_config/etc/...` isn't live
 
 `keyd` and `systemd-logind` read from `/etc/keyd/` and `/etc/systemd/logind.conf.d/`, which
