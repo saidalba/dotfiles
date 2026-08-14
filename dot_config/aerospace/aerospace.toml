@@ -1,0 +1,235 @@
+# Config version for compatibility
+config-version = 2
+
+# ==============================================================================
+# STARTUP & SYSTEM OPTIONS
+# ==============================================================================
+
+after-startup-command = []
+start-at-login = true
+auto-reload-config = true
+
+# ==============================================================================
+# NORMALIZATIONS
+# ==============================================================================
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# ==============================================================================
+# LAYOUT DEFAULTS
+# ==============================================================================
+
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# ==============================================================================
+# FOCUS CALLBACKS & MOUSE
+# ==============================================================================
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+automatically-unhide-macos-hidden-apps = false
+focus-follows-mouse.enabled = false
+key-mapping.preset = 'qwerty'
+
+# ==============================================================================
+# WORKSPACES
+# ==============================================================================
+# Internal / Main:      1, 3, 5, 7, 9
+# External / Secondary: 2, 4, 6, 8, 10
+
+persistent-workspaces = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+]
+
+# ==============================================================================
+# GAPS
+# ==============================================================================
+
+gaps.inner.horizontal = 8
+gaps.inner.vertical = 8
+gaps.outer.left = 8
+gaps.outer.bottom = 8
+gaps.outer.top = 8
+gaps.outer.right = 8
+
+# ==============================================================================
+# WINDOW RULES
+# ==============================================================================
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+# ==============================================================================
+# KEYBINDINGS
+# Main Mode - Using Alt/Option as modifier
+# ==============================================================================
+
+[mode.main.binding]
+
+# ------------------------------------------------------------------------------
+# Basics
+# ------------------------------------------------------------------------------
+
+alt-enter = 'exec-and-forget open -n -a Ghostty'
+alt-q = 'close'
+alt-d = 'exec-and-forget open -a Alfred\ 5'
+alt-shift-c = 'reload-config'
+
+# ------------------------------------------------------------------------------
+# Screenshots
+# ------------------------------------------------------------------------------
+
+f13 = 'exec-and-forget screencapture ~/Desktop/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png'
+alt-ctrl-s = 'exec-and-forget screencapture ~/Desktop/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png'
+alt-shift-s = 'exec-and-forget screencapture -i ~/Desktop/Screenshot_$(date +%Y-%m-%d_%H-%M-%S).png'
+
+# ------------------------------------------------------------------------------
+# Move Focus
+# ------------------------------------------------------------------------------
+
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+alt-left = 'focus left'
+alt-down = 'focus down'
+alt-up = 'focus up'
+alt-right = 'focus right'
+
+# ------------------------------------------------------------------------------
+# Move Focused Window
+# ------------------------------------------------------------------------------
+
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+alt-shift-left = 'move left'
+alt-shift-down = 'move down'
+alt-shift-up = 'move up'
+alt-shift-right = 'move right'
+
+# ------------------------------------------------------------------------------
+# Layout & Splits
+# ------------------------------------------------------------------------------
+
+alt-b = 'layout horizontal'
+alt-v = 'layout vertical'
+alt-s = 'layout accordion'
+alt-e = 'layout tiles horizontal vertical'
+alt-f = 'fullscreen'
+alt-shift-space = 'layout floating tiling'
+
+# ------------------------------------------------------------------------------
+# Workspaces
+# ------------------------------------------------------------------------------
+
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
+
+# ------------------------------------------------------------------------------
+# Move Window to Workspace
+# ------------------------------------------------------------------------------
+
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 10'
+
+# ------------------------------------------------------------------------------
+# Modes
+# ------------------------------------------------------------------------------
+
+alt-r = 'mode resize'
+alt-shift-semicolon = 'mode service'
+
+# ==============================================================================
+# RESIZE MODE
+# ==============================================================================
+
+[mode.resize.binding]
+
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+
+left = 'resize width -50'
+down = 'resize height +50'
+up = 'resize height -50'
+right = 'resize width +50'
+
+enter = 'mode main'
+esc = 'mode main'
+
+# ==============================================================================
+# SERVICE MODE
+# ==============================================================================
+
+[mode.service.binding]
+
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main']
+f = ['layout floating tiling', 'mode main']
+backspace = ['close-all-windows-but-current', 'mode main']
+
+# ==============================================================================
+# WORKSPACE → MONITOR ASSIGNMENT
+# ==============================================================================
+# IMPORTANT:
+# This table must remain at the END of the config because TOML tables
+# continue until another table is declared.
+
+# Internal / Main
+# 1, 3, 5, 7, 9
+
+# External / Secondary
+# 2, 4, 6, 8, 10
+
+[workspace-to-monitor-force-assignment]
+1 = 'main'
+2 = 'secondary'
+3 = 'main'
+4 = 'secondary'
+5 = 'main'
+6 = 'secondary'
+7 = 'main'
+8 = 'secondary'
+9 = 'main'
+10 = 'secondary'

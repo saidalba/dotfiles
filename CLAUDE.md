@@ -20,6 +20,8 @@ no root/system-level target support.
 | `dot_config/sway/config` | `~/.config/sway/config` | sway WM config — borders, gaps, keybinds, **hardcoded monitor outputs** |
 | `dot_config/etc/keyd/*.conf` | `~/.config/etc/keyd/*.conf` | **not** `/etc/keyd/` — see caveat below |
 | `dot_config/etc/systemd/logind.conf.d/*.conf` | `~/.config/etc/systemd/logind.conf.d/*.conf` | **not** `/etc/systemd/` — see caveat below |
+| `dot_config/aerospace/aerospace.toml` | `~/.config/aerospace/aerospace.toml` | macOS-only tiling WM config — the Sway analog on macOS |
+| `dot_config/karabiner/karabiner.json` | `~/.config/karabiner/karabiner.json` | macOS-only keyboard remapping — the keyd analog on macOS |
 
 ## Known caveat: the `dot_config/etc/...` files are not live
 
@@ -57,10 +59,14 @@ git repo and never changes the destination). Flag this if asked to touch keyd or
 ## Cross-OS handling (macOS + Arch Linux)
 
 `.chezmoiignore.tmpl` is templated (Go text/template, using chezmoi's built-in
-`.chezmoi.os` variable — `"darwin"` on macOS, `"linux"` here) to skip Linux-only configs
-on macOS: `.config/sway`, `.config/etc/keyd`, `.config/etc/systemd/logind.conf.d`. This is
-the *only* templating in the repo so far — every other managed file is still applied
-identically on both machines, byte-for-byte, with no `.tmpl` extension or `.chezmoidata`.
+`.chezmoi.os` variable — `"darwin"` on macOS, `"linux"` here) to skip each OS's
+irrelevant configs:
+- On macOS: `.config/sway`, `.config/etc/keyd`, `.config/etc/systemd/logind.conf.d`
+- On Linux: `.config/aerospace`, `.config/karabiner`
+
+This is the *only* templating in the repo so far — every other managed file is still
+applied identically on both machines, byte-for-byte, with no `.tmpl` extension or
+`.chezmoidata`.
 
 If a specific file's *content* needs to differ per-OS (not just whether it's applied at
 all — e.g. package manager paths in `dot_config/bash/rc`), convert that individual file to

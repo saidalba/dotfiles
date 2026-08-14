@@ -15,9 +15,12 @@ chezmoi apply
 - `dot_claude/settings.json` — Claude Code settings
 - `dot_config/etc/keyd/*.conf`, `dot_config/etc/systemd/logind.conf.d/*.conf` — copies only,
   not live (see caveat below)
+- `dot_config/aerospace/aerospace.toml` — macOS tiling WM (Sway analog)
+- `dot_config/karabiner/karabiner.json` — macOS keyboard remapping (keyd analog)
 
 Shared between a macOS laptop and this Arch Linux laptop. `.chezmoiignore.tmpl` skips
-Linux-only configs (sway, keyd, logind) on macOS.
+Linux-only configs (sway, keyd, logind) on macOS, and macOS-only configs (aerospace,
+karabiner) on Linux.
 
 #### Caveat: `dot_config/etc/...` isn't live
 

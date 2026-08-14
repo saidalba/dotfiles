@@ -6,3 +6,8 @@ CLAUDE.md
 .config/etc/keyd
 .config/etc/systemd/logind.conf.d
 {{- end }}
+
+{{ if eq .chezmoi.os "linux" -}}
+.config/aerospace
+.config/karabiner
+{{- end }}
