@@ -4,6 +4,10 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+### Start on login
+
+exec gammastep-indicator
+
 ### Personal Configs
 #
 # Container border pixel
